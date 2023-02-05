@@ -1,4 +1,4 @@
-# Jobify - Full Stack MERN (MongoDB, Express, React, NodeJS) Job Applications Tracking App
+# Jobify - Full Stack MERN (MongoDB, Express, React, NodeJS) Job Tracking App
 
 ## Live Demo:
 
