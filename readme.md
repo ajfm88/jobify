@@ -6,7 +6,10 @@
 
 ## Features:
 
-- ###. 🎨
+- Uses MongoDB for database and storage. 🗄️
+- Styled with Styled Components. 💅
+- Front-end built in React. ⚛️
+- User Profile creation or use the test demo account. 👥
 
 #### Original Course
 
