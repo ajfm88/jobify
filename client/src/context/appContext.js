@@ -27,6 +27,7 @@ import {
   SHOW_STATS_BEGIN,
   SHOW_STATS_SUCCESS,
   CLEAR_FILTERS,
+  CHANGE_PAGE,
 } from './actions';
 
 // set as default
@@ -108,14 +109,12 @@ const AppProvider = ({ children }) => {
       return Promise.reject(error);
     }
   );
-
   const displayAlert = () => {
     dispatch({
       type: DISPLAY_ALERT,
     });
     clearAlert();
   };
-
   const clearAlert = () => {
     setTimeout(() => {
       dispatch({
@@ -123,13 +122,11 @@ const AppProvider = ({ children }) => {
       });
     }, 3000);
   };
-
   const addUserToLocalStorage = ({ user, token, location }) => {
     localStorage.setItem('user', JSON.stringify(user));
     localStorage.setItem('token', token);
     localStorage.setItem('location', location);
   };
-
   const removeUserFromLocalStorage = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
@@ -157,7 +154,6 @@ const AppProvider = ({ children }) => {
     }
     clearAlert();
   };
-
   const toggleSidebar = () => {
     dispatch({ type: TOGGLE_SIDEBAR });
   };
@@ -189,7 +185,6 @@ const AppProvider = ({ children }) => {
     }
     clearAlert();
   };
-
   const handleChange = ({ name, value }) => {
     dispatch({
       type: HANDLE_CHANGE,
@@ -225,11 +220,10 @@ const AppProvider = ({ children }) => {
     }
     clearAlert();
   };
-
   const getJobs = async () => {
-    // will add page later
-    const { search, searchStatus, searchType, sort } = state;
-    let url = `/jobs?status=${searchStatus}&jobType=${searchType}&sort=${sort}`;
+    const { page, search, searchStatus, searchType, sort } = state;
+
+    let url = `/jobs?page=${page}&status=${searchStatus}&jobType=${searchType}&sort=${sort}`;
     if (search) {
       url = url + `&search=${search}`;
     }
@@ -250,11 +244,9 @@ const AppProvider = ({ children }) => {
     }
     clearAlert();
   };
-
   const setEditJob = (id) => {
     dispatch({ type: SET_EDIT_JOB, payload: { id } });
   };
-
   const editJob = async () => {
     dispatch({ type: EDIT_JOB_BEGIN });
     try {
@@ -280,7 +272,6 @@ const AppProvider = ({ children }) => {
     }
     clearAlert();
   };
-
   const deleteJob = async (jobId) => {
     dispatch({ type: DELETE_JOB_BEGIN });
     try {
@@ -290,7 +281,6 @@ const AppProvider = ({ children }) => {
       logoutUser();
     }
   };
-
   const showStats = async () => {
     dispatch({ type: SHOW_STATS_BEGIN });
     try {
@@ -312,6 +302,9 @@ const AppProvider = ({ children }) => {
   const clearFilters = () => {
     dispatch({ type: CLEAR_FILTERS });
   };
+  const changePage = (page) => {
+    dispatch({ type: CHANGE_PAGE, payload: { page } });
+  };
   return (
     <AppContext.Provider
       value={{
@@ -328,6 +321,7 @@ const AppProvider = ({ children }) => {
         editJob,
         showStats,
         clearFilters,
+        changePage,
       }}
     >
       {children}
