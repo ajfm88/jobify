@@ -62,42 +62,23 @@ function Register() {
   return (
     <Wrapper className='full-page'>
       <form className='form' onSubmit={onSubmit}>
-        <Logo />
-        <h3>{values.isMember ? 'Login' : 'Register'}</h3>
-        {showAlert && <Alert />}
-        {/* name input */}
-        {!values.isMember && (
-          <FormRow
-            type='text'
-            name='name'
-            value={values.name}
-            handleChange={handleChange}
-          />
-        )}
-        {/* email input */}
-        <FormRow
-          type='email'
-          name='email'
-          value={values.email}
-          handleChange={handleChange}
-        />
-        {/* password input */}
-        <FormRow
-          type='password'
-          name='password'
-          value={values.password}
-          handleChange={handleChange}
-        />
         <button type='submit' className='btn btn-block' disabled={isLoading}>
           submit
         </button>
-
-        <p>
-          {values.isMember ? 'Not a member yet?' : 'Already a member?'}
-          <button type='button' onClick={toggleMember} className='member-btn'>
-            {values.isMember ? 'Register' : 'Login'}
-          </button>
-        </p>
+        <button
+          type='button'
+          className='btn btn-block btn-hipster'
+          disabled={isLoading}
+          onClick={() => {
+            setupUser({
+              currentUser: { email: 'testUser@test.com', password: 'secret' },
+              endPoint: 'login',
+              alertText: 'Login Successful! Redirecting...',
+            });
+          }}
+        >
+          {isLoading ? 'loading...' : 'demo app'}
+        </button>
       </form>
     </Wrapper>
   );
