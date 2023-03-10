@@ -28,6 +28,8 @@ import {
   SHOW_STATS_SUCCESS,
   CLEAR_FILTERS,
   CHANGE_PAGE,
+  GET_CURRENT_USER_BEGIN,
+  GET_CURRENT_USER_SUCCESS,
 } from './actions';
 
 // set as default
@@ -64,8 +66,8 @@ const initialState = {
   searchType: 'all',
   sort: 'latest',
   sortOptions: ['latest', 'oldest', 'a-z', 'z-a'],
+  userLoading: true,
 };
-
 const AppContext = React.createContext();
 
 const AppProvider = ({ children }) => {
@@ -132,6 +134,24 @@ const AppProvider = ({ children }) => {
     localStorage.removeItem('user');
     localStorage.removeItem('location');
   };
+  const getCurrentUser = async () => {
+    dispatch({ type: GET_CURRENT_USER_BEGIN });
+    try {
+      const { data } = await authFetch('/auth/getCurrentUser');
+      const { user, location } = data;
+
+      dispatch({
+        type: GET_CURRENT_USER_SUCCESS,
+        payload: { user, location },
+      });
+    } catch (error) {
+      if (error.response.status === 401) return;
+      logoutUser();
+    }
+  };
+  useEffect(() => {
+    getCurrentUser();
+  }, []);
   const setupUser = async ({ currentUser, endPoint, alertText }) => {
     dispatch({ type: SETUP_USER_BEGIN });
     try {
@@ -303,6 +323,10 @@ const AppProvider = ({ children }) => {
   };
   const changePage = (page) => {
     dispatch({ type: CHANGE_PAGE, payload: { page } });
+  };
+  const logoutUser = async () => {
+    await authFetch.get('/auth/logout');
+    dispatch({ type: LOGOUT_USER });
   };
   return (
     <AppContext.Provider

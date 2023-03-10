@@ -24,6 +24,7 @@ import jobsRouter from './routes/jobsRoutes.js';
 import notFoundMiddleware from './middleware/not-found.js';
 import errorHandlerMiddleware from './middleware/error-handler.js';
 import authenticateUser from './middleware/auth.js';
+import cookieParser from 'cookie-parser';
 
 if (process.env.NODE_ENV !== 'production') {
   app.use(morgan('dev'));
@@ -33,8 +34,8 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 
 app.use(express.static(path.resolve(__dirname, './client/build')));
 app.use(express.json());
+app.use(cookieParser());
 
-app.use(express.json());
 app.use(helmet());
 app.use(xss());
 app.use(mongoSanitize());
