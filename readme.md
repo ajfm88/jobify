@@ -2,7 +2,7 @@
 
 ## Live Demo:
 
-- [Jobify](https://jobify-ajfm88.vercel.app)
+- [Jobify](https://jobify-ajfm88.onrender.com)
 
 ## Features:
 

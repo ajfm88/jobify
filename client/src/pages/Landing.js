@@ -4,18 +4,19 @@ import { Logo } from '../components';
 import { Link } from 'react-router-dom';
 import { Navigate } from 'react-router-dom';
 import { useAppContext } from '../context/appContext';
+import React from 'react';
 
 const Landing = () => {
   const { user } = useAppContext();
   return (
     <React.Fragment>
+      {user && <Navigate to='/' />}
       <Wrapper>
-        {user && <Navigate to='/' />}
         <nav>
           <Logo />
         </nav>
         <div className='container page'>
-          {/* Info */}
+          {/* info */}
           <div className='info'>
             <h1>
               job <span>tracking</span> app
@@ -29,7 +30,7 @@ const Landing = () => {
               journey with confidence today and land your dream job.
             </p>
             <Link to='/register' className='btn btn-hero'>
-              Login / Register
+              Login/Register
             </Link>
           </div>
           <img src={main} alt='job hunt' className='img main-img' />

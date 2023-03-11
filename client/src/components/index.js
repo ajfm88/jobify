@@ -10,7 +10,6 @@ import Navbar from './Navbar';
 import SearchContainer from './SearchContainer';
 import SmallSidebar from './SmallSidebar';
 import StatsContainer from './StatsContainer';
-
 export {
   Logo,
   FormRow,

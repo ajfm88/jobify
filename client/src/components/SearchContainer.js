@@ -7,16 +7,15 @@ const SearchContainer = () => {
   const {
     isLoading,
     search,
-    handleChange,
     searchStatus,
-    statusOptions,
-    jobTypeOptions,
     searchType,
-    clearFilters,
     sort,
     sortOptions,
+    handleChange,
+    clearFilters,
+    jobTypeOptions,
+    statusOptions,
   } = useAppContext();
-
   const handleSearch = (e) => {
     handleChange({ name: e.target.name, value: e.target.value });
   };
@@ -34,12 +33,15 @@ const SearchContainer = () => {
         handleChange({ name: e.target.name, value: e.target.value });
       }, 1000);
     };
+  };
   const optimizedDebounce = useMemo(() => debounce(), []);
   return (
     <Wrapper>
       <form className='form'>
         <h4>search form</h4>
         <div className='form-center'>
+          {/* search position */}
+
           <FormRow
             type='text'
             name='search'
@@ -48,29 +50,27 @@ const SearchContainer = () => {
           />
           {/* search by status */}
           <FormRowSelect
-            labelText='job status'
+            labelText='status'
             name='searchStatus'
             value={searchStatus}
             handleChange={handleSearch}
             list={['all', ...statusOptions]}
-          ></FormRowSelect>
+          />
           {/* search by type */}
-
           <FormRowSelect
-            labelText='job type'
+            labelText='type'
             name='searchType'
             value={searchType}
             handleChange={handleSearch}
             list={['all', ...jobTypeOptions]}
-          ></FormRowSelect>
+          />
           {/* sort */}
-
           <FormRowSelect
             name='sort'
             value={sort}
             handleChange={handleSearch}
             list={sortOptions}
-          ></FormRowSelect>
+          />
           <button
             className='btn btn-block btn-danger'
             disabled={isLoading}
@@ -78,7 +78,7 @@ const SearchContainer = () => {
           >
             clear filters
           </button>
-          </div>
+        </div>
       </form>
     </Wrapper>
   );
