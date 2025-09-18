@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const Wrapper = styled.div`
   display: flex;
@@ -17,4 +17,5 @@ const Wrapper = styled.div`
     letter-spacing: var(--letter-spacing);
   }
 `;
+
 export default Wrapper;
