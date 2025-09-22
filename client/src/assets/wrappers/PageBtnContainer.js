@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const Wrapper = styled.section`
   height: 6rem;
@@ -56,4 +56,5 @@ cursor:pointer;
   cursor:text;
 }
 `;
+
 export default Wrapper;
