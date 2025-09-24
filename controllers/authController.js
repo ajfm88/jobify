@@ -1,12 +1,8 @@
 import { StatusCodes } from "http-status-codes";
 import User from "../models/UserModel.js";
-import { hashPassword } from "../utils/passwordUtils.js";
+import { comparePassword, hashPassword } from "../utils/passwordUtils.js";
 import { UnauthenticatedError } from "../errors/customErrors.js";
-import { hashPassword, comparePassword } from "../utils/passwordUtils.js";
 import { createJWT } from "../utils/tokenUtils.js";
-
-const token = createJWT({ userId: user._id, role: user.role });
-console.log(token);
 
 export const register = async (req, res) => {
   const isFirstAccount = (await User.countDocuments()) === 0;
@@ -22,10 +18,12 @@ export const register = async (req, res) => {
 export const login = async (req, res) => {
   const user = await User.findOne({ email: req.body.email });
 
-  const isValidUser = user && (await comparePassword(password, user.password));
+  const isValidUser =
+    user && (await comparePassword(req.body.password, user.password));
+
   if (!isValidUser) throw new UnauthenticatedError("invalid credentials");
 
-  const token = createJWT({ userId: user.id, role: user.role });
+  const token = createJWT({ userId: user._id, role: user.role });
 
   const oneDay = 1000 * 60 * 60 * 24;
 
@@ -34,14 +32,7 @@ export const login = async (req, res) => {
     expires: new Date(Date.now() + oneDay),
     secure: process.env.NODE_ENV === "production",
   });
-  res.status(StatusCodes.CREATED).json({ msg: "user logged in" });
-  const isPasswordCorrect = await comparePassword(
-    req.body.password,
-    user.password
-  );
-
-  if (!isPasswordCorrect) throw new UnauthenticatedError("invalid credentials");
-  res.send("login route");
+  res.status(StatusCodes.OK).json({ msg: "user logged in" });
 };
 
 export const logout = (req, res) => {

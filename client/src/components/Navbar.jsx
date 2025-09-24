@@ -21,7 +21,6 @@ const Navbar = () => {
           <ThemeToggle />
           <LogoutContainer />
         </div>
-        <div className="btn-container">toggle/logout</div>
       </div>
     </Wrapper>
   );

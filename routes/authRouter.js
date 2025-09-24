@@ -5,7 +5,6 @@ import {
   validateRegisterInput,
   validateLoginInput,
 } from "../middleware/validationMiddleware.js";
-
 import rateLimiter from "express-rate-limit";
 
 const apiLimiter = rateLimiter({

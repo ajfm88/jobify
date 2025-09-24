@@ -1,10 +1,10 @@
 import { FaLocationArrow, FaBriefcase, FaCalendarAlt } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, Form } from "react-router-dom";
 import Wrapper from "../assets/wrappers/Job";
 import JobInfo from "./JobInfo";
-import { Form } from "react-router-dom";
 import day from "dayjs";
 import advancedFormat from "dayjs/plugin/advancedFormat";
+
 day.extend(advancedFormat);
 
 const Job = ({
@@ -17,7 +17,6 @@ const Job = ({
   jobStatus,
 }) => {
   const date = day(createdAt).format("MMM Do, YYYY");
-
   return (
     <Wrapper>
       <header>
@@ -34,7 +33,6 @@ const Job = ({
           <JobInfo icon={<FaBriefcase />} text={jobType} />
           <div className={`status ${jobStatus}`}>{jobStatus}</div>
         </div>
-
         <footer className="actions">
           <Link to={`../edit-job/${_id}`} className="btn edit-btn">
             Edit
