@@ -16,10 +16,19 @@ const Landing = () => {
             job <span>tracking</span> app
           </h1>
           <p>
-            I'm baby wayfarers hoodie next level taiyaki brooklyn cliche blue
-            bottle single-origin coffee chia. Aesthetic post-ironic venmo,
-            quinoa lo-fi tote bag adaptogen everyday carry meggings +1 brunch
-            narwhal.
+            Take control of your job hunt with our comprehensive MERN stack
+            application. Create your personalized profile and start logging job
+            applications with detailed tracking for company, position, job type
+            (full-time, part-time, contract), and location. Monitor your
+            application status from pending to interview to offer, with
+            automatic timestamps to track your progress over time.
+          </p>
+          <p>
+            You can also click on our <span>Login / Demo User</span> button to
+            test-drive the full application - no registration required. In the
+            Login page, click on the <span>Explore The App</span> button to
+            explore all features and see how <span>Jobify</span> can transform
+            your job search experience.
           </p>
           <Link to="/register" className="btn register-link">
             Register

@@ -27,6 +27,9 @@ const Wrapper = styled.section`
     color: var(--text-secondary-color);
     margin-bottom: 1.5rem;
     max-width: 35em;
+    span {
+      color: var(--primary-500);
+    }
   }
   .register-link {
     margin-right: 1rem;
